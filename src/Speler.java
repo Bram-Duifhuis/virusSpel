@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Speler {
     private char token;
 
@@ -15,27 +17,73 @@ public class Speler {
         return token;
     }
 
-    public String getMoves(Board board){
-        String string = "";
-
+    public ArrayList<Move> getMoves(Board board){
+        ArrayList<Move> list = new ArrayList<>();
 //      check right
         if(x != board.size - 1 && board.getValue(x + 1, y) != getInfected()){
-            string += "You can infect right\n";
+            list.add(new InfectMove(x + 1, y));
         }
 //      check left
         if(x != 0 && board.getValue(x - 1, y) != getInfected()){
-            string += "You can infect left\n";
+            list.add(new InfectMove(x - 1, y));
         }
 //      check down
         if(y != board.size - 1 && board.getValue(x, y+ 1) != getInfected()){
-            string += "You can infect down\n";
+            list.add(new InfectMove(x, y+ 1));
         }
 //      check up
         if(y != 0 && board.getValue(x, y -1) != getInfected()){
-            string += "You can infect up\n";
+            list.add(new InfectMove(x, y -1));
+        }
+//      check top right
+        if ( x != board.size - 1 && y != 0 &&  board.getValue(x + 1, y -1) != getInfected()){
+            list.add(new InfectMove(x + 1, y -1));
+        }
+//      check top left
+        if (x != 0 && y != 0 &&  board.getValue(x - 1, y -1) != getInfected()){
+            list.add(new InfectMove(x - 1, y -1));
+        }
+//      check bottom right
+        if (x != board.size - 1  && y != board.size - 1 &&  board.getValue(x + 1, y + 1) != getInfected()){
+            list.add(new InfectMove(x - 1, y -1));
         }
 
-        return string;
+        if (x != 0  && y != board.size - 1 &&  board.getValue(x - 1, y + 1) != getInfected()){
+            list.add(new InfectMove(x - 1, y -1));
+        }
+
+        return list;
     }
 
 }
+
+/*
+
+size = w * h
+    neighbors = []
+    if i - w >= 0:
+        neighbors.append(i - w)  # north
+    if i % w != 0:
+        neighbors.append(i - 1)  # west
+
+    if (i + 1) % w != 0:
+        neighbors.append(i + 1)  # east
+
+    if i + w < size:
+        neighbors.append(i + w)  # south
+
+    if mode == 8:
+        if ((i - w - 1) >= 0) and (i % w != 0):
+            neighbors.append(i - w - 1)  # northwest
+
+        if ((i - w + 1) >= 0) and ((i + 1) % w != 0):
+            neighbors.append(i - w + 1)  # northeast
+
+        if ((i + w - 1) < size) and (i % w != 0):
+            neighbors.append(i + w - 1)  # southwest
+
+        if ((i + w + 1) < size) and ((i + 1) % w != 0):
+            neighbors.append(i + w + 1)  # southeast
+    return neighbors
+
+ */

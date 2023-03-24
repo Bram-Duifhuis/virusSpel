@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -23,14 +24,26 @@ public class Main {
         }
 
 
-        Board board = new Board(spelers);
+        Board board = new Board(spelers, 10);
         boolean playing = true;
 
         while (playing) {
-            System.out.println("Welke zet wil je doen speler " + spelers[currentPlayer].getCurrentPlayer());
-            System.out.println(spelers[currentPlayer].getMoves(board));
 
             System.out.println(board);
+            boolean askingMove = true;
+            while (askingMove){
+                System.out.println("Welke zet wil je doen speler " + spelers[currentPlayer].getCurrentPlayer());
+                ArrayList<Move> list = spelers[currentPlayer].getMoves(board);
+
+                for (int i = 0; i < list.size(); i++) {
+                    System.out.println("[" + (i + 1) + "] " + list.get(i) );
+                }
+                break;
+
+
+
+            }
+
             currentPlayer = (currentPlayer + 1 ) % spelers.length;
             break;
 

@@ -2,15 +2,17 @@ import java.util.Arrays;
 
 public class Board {
 
-    final int size = 10;
-    int[] posibleStartLocations = {0, size * size - 1, size - 1, size * (size - 1)};
+    final int size;
+    int[] possibleStartLocations;
     private char[] board;
 
-    public Board(Speler[] spelers){
+    public Board(Speler[] spelers, int size){
+        this.size = size;
+        possibleStartLocations = new int[]{0, size * size - 1, size - 1, size * (size - 1)};
         board = new char[size * size];
         Arrays.fill(board, '_');
         for (int i = 0; i < spelers.length; i++) {
-            board[posibleStartLocations[i]] = spelers[i].getCurrentPlayer();
+            board[possibleStartLocations[i]] = spelers[i].getCurrentPlayer();
         }
 
 
