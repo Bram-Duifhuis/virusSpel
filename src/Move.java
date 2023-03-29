@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class Move {
 
@@ -17,8 +18,23 @@ class InfectMove extends Move {
         super(x, y);
     }
 
+
     @Override
     public String toString() {
-        return "Infect to the" ;
+
+        ArrayList<String> directions = new ArrayList<>();
+
+        if (y == -1){
+            directions.add("up");
+        }
+        if (y == 1){
+            directions.add("down");
+        }if (x == 1){
+            directions.add("right");
+        }if (x == -1){
+            directions.add("left");
+        }
+
+        return "infect: " + String.join(" and ", directions);
     }
 }

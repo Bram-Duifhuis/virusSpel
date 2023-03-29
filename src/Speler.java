@@ -21,35 +21,35 @@ public class Speler {
         ArrayList<Move> list = new ArrayList<>();
 //      check right
         if(x != board.size - 1 && board.getValue(x + 1, y) != getInfected()){
-            list.add(new InfectMove(x + 1, y));
+            list.add(new InfectMove( 1, 0));
         }
 //      check left
         if(x != 0 && board.getValue(x - 1, y) != getInfected()){
-            list.add(new InfectMove(x - 1, y));
+            list.add(new InfectMove(-1, 0));
         }
 //      check down
-        if(y != board.size - 1 && board.getValue(x, y+ 1) != getInfected()){
-            list.add(new InfectMove(x, y+ 1));
+        if(y != board.size - 1 && board.getValue(x, y + 1) != getInfected()){
+            list.add(new InfectMove(0,  1));
         }
 //      check up
         if(y != 0 && board.getValue(x, y -1) != getInfected()){
-            list.add(new InfectMove(x, y -1));
+            list.add(new InfectMove(0,  -1));
         }
 //      check top right
         if ( x != board.size - 1 && y != 0 &&  board.getValue(x + 1, y -1) != getInfected()){
-            list.add(new InfectMove(x + 1, y -1));
+            list.add(new InfectMove( 1,  -1));
         }
 //      check top left
         if (x != 0 && y != 0 &&  board.getValue(x - 1, y -1) != getInfected()){
-            list.add(new InfectMove(x - 1, y -1));
+            list.add(new InfectMove( - 1,  -1));
         }
 //      check bottom right
         if (x != board.size - 1  && y != board.size - 1 &&  board.getValue(x + 1, y + 1) != getInfected()){
-            list.add(new InfectMove(x - 1, y -1));
+            list.add(new InfectMove(  1,  1));
         }
 
         if (x != 0  && y != board.size - 1 &&  board.getValue(x - 1, y + 1) != getInfected()){
-            list.add(new InfectMove(x - 1, y -1));
+            list.add(new InfectMove(- 1,  1));
         }
 
         return list;
