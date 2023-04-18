@@ -7,6 +7,9 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         int currentPlayer = 0;
+        int size = 6;
+        int[][] possibleStartLocations = new int[][]{{0,0},{size -1,size-1},{0,size-1},{size-1,0}};
+
         int totaleSpelers;
         while (true) {
             System.out.println("Hoeveel spelers zijn er?");
@@ -20,11 +23,11 @@ public class Main {
         Speler[] spelers = new Speler[totaleSpelers];
         for(int i = 0; i < spelers.length; i++){
             System.out.println("Voer caracter in voor speler: " + (i+1));
-            spelers[i] = new Speler(scanner.next().charAt(0));
+            spelers[i] = new Speler(scanner.next().charAt(0), possibleStartLocations[i][0], possibleStartLocations[i][1] );
         }
 
 
-        Board board = new Board(spelers, 10);
+        Board board = new Board(spelers, size);
         boolean playing = true;
 
         while (playing) {
@@ -33,19 +36,26 @@ public class Main {
             boolean askingMove = true;
             while (askingMove){
                 System.out.println("Welke zet wil je doen speler " + spelers[currentPlayer].getCurrentPlayer());
-                ArrayList<Move> list = spelers[currentPlayer].getMoves(board);
+                System.out.println("x:" + spelers[currentPlayer].getX() + " y:" + spelers[currentPlayer].getY() );
+                ArrayList<Option> list = spelers[currentPlayer].getMoves(board);
 
                 for (int i = 0; i < list.size(); i++) {
                     System.out.println("[" + (i + 1) + "] " + list.get(i) );
                 }
-                break;
 
+                int item = scanner.nextInt();
+                item--;
+                if (item >= 0 || item < list.size()){
+                    list.get(item).excecute(board, spelers[currentPlayer] );
+                    askingMove = false;
+                }else {
+                    System.out.println("please use a value between 1 and " + list.size());
+                }
 
 
             }
 
             currentPlayer = (currentPlayer + 1 ) % spelers.length;
-            break;
 
         }
     }

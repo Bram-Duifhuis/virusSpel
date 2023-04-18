@@ -3,12 +3,12 @@ import java.util.Arrays;
 public class Board {
 
     final int size;
-    int[] possibleStartLocations;
     private char[] board;
 
     public Board(Speler[] spelers, int size){
+        int[] possibleStartLocations = new int[]{0, size * size - 1, size - 1, size * (size - 1)};
+
         this.size = size;
-        possibleStartLocations = new int[]{0, size * size - 1, size - 1, size * (size - 1)};
         board = new char[size * size];
         Arrays.fill(board, '_');
         for (int i = 0; i < spelers.length; i++) {
