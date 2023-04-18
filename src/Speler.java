@@ -17,7 +17,13 @@ public class Speler {
         return token;
     }
 
+
     public ArrayList<Move> getMoves(Board board){
+        ArrayList<Move> list = new ArrayList<>();
+        list.addAll(getMovesForInfecting(board));
+
+    }
+    public ArrayList<Move> getMovesForInfecting(Board board){
         ArrayList<Move> list = new ArrayList<>();
 //      check right
         if(x != board.size - 1 && board.getValue(x + 1, y) != getInfected()){
@@ -54,7 +60,6 @@ public class Speler {
 
         return list;
     }
-
 }
 
 /*

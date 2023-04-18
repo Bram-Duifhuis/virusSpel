@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 
+
+class Option {
+
+}
 public class Move {
 
     protected int x;
@@ -8,6 +12,22 @@ public class Move {
     public Move(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+
+    public  String getDirections(){
+        ArrayList<String> directions = new ArrayList<>();
+
+        if (y <= -1){
+            directions.add("up");
+        }
+        if (y >= 1){
+            directions.add("down");
+        }if (x >= 1){
+            directions.add("right");
+        }if (x <= -1){
+            directions.add("left");
+        }
+        return String.join(" and ", directions);
     }
 }
 
@@ -21,20 +41,6 @@ class InfectMove extends Move {
 
     @Override
     public String toString() {
-
-        ArrayList<String> directions = new ArrayList<>();
-
-        if (y == -1){
-            directions.add("up");
-        }
-        if (y == 1){
-            directions.add("down");
-        }if (x == 1){
-            directions.add("right");
-        }if (x == -1){
-            directions.add("left");
-        }
-
-        return "infect: " + String.join(" and ", directions);
+        return "infect: " + getDirections();
     }
 }
